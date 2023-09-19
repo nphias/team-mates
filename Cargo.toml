@@ -7,21 +7,21 @@ opt-level = "z"
 
 [workspace]
 resolver ="2"
-members = ["zomes/rna/*", "zomes/dna/*"]
+members = ["zomes/coordinator/*", "zomes/integrity/*"]
 
 [workspace.dependencies]
-hdi = "=0.2"
-hdk = "=0.1"
-serde = "1"
+hdi = "=0.3"
+hdk = "=0.2"
+serde = "=1.0.163"
 
 [workspace.dependencies.invitations]
-path = "zomes/rna/invitations"
+path = "zomes/coordinator/invitations"
 
-[workspace.dependencies.invitations_dna]
-path = "zomes/dna/invitations"
+[workspace.dependencies.invitations_integrity]
+path = "zomes/integrity/invitations"
 
 [workspace.dependencies.profiles]
-path = "zomes/rna/profiles"
+path = "zomes/coordinator/profiles"
 
 [workspace.dependencies.profiles_integrity]
-path = "zomes/dna/profiles"
+path = "zomes/integrity/profiles"

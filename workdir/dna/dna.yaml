@@ -1,19 +1,28 @@
 ---
 manifest_version: "1"
-name: team
+name: team-mates
 integrity:
   network_seed: ~
   properties: ~
   origin_time: 1669136217555883
   zomes:
-    - name: profiles
+    - name: profiles_integrity
       hash: ~
-      bundled: "../../target/wasm32-unknown-unknown/release/profiles.wasm"
+      bundled: "../../target/wasm32-unknown-unknown/release/profiles_integrity.wasm"
       dependencies: ~
+    - name: invitations_integrity
+      hash: ~
+      bundled: "../../target/wasm32-unknown-unknown/release/invitations_integrity.wasm"
+      dependencies: ~
+coordinator:
+    zomes: 
+    - name: profiles
+      bundled: "../../target/wasm32-unknown-unknown/release/profiles.wasm"
+      dependencies:
+        - name: profiles_integrity
     - name: invitations
       hash: ~
       bundled: "../../target/wasm32-unknown-unknown/release/invitations.wasm"
-      dependencies: ~
-  coordinator:
-    zomes: []
+      dependencies:
+        - name: invitations_integrity
   

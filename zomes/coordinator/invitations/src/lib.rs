@@ -1,0 +1,1 @@
+extern crate hc_coordinator_zome_invitations;

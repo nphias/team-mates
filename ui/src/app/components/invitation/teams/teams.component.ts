@@ -28,7 +28,8 @@ export class TeamsComponent {
   }
 
   ngOnInit(){
-    this.profileDictionarySubscription$ = this._profileStore.selectKeyNickIndexes().subscribe(res=>this.profileDictionary = Object.assign({},...res))
+    this.profileDictionarySubscription$ = this._profileStore.selectAgentKeyNicksDictionary().subscribe(res=>this.profileDictionary = Object.assign({},...res))
+    //this.profileDictionarySubscription$ = this._profileStore.selectKeyNickIndexes().subscribe(res=>this.profileDictionary = Object.assign({},...res))
   }
 
   ngOnDestroy(){

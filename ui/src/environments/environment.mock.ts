@@ -7,5 +7,5 @@ export const environment = {
   mock: true,
   HOST_URL:'ws://localhost:7777',
   APP_ID:'team-mates',
-  cell1:'profile_invitation'
+  cells: ['team']//'profile_invitation'
 };

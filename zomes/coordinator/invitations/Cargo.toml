@@ -8,7 +8,7 @@ crate-type = ["cdylib", "rlib"]
 name = "invitations"
 
 [dependencies]
-hc_zome_invitations_rna = {git = "https://github.com/holochain-engineers/invitations", branch = "main"}
+hc_coordinator_zome_invitations = {git = "https://github.com/holochain-open-dev/invitations", branch = "crates-only"}
 hdk = { workspace = true }
 serde = { workspace = true }
-invitations_dna = { workspace = true }
+invitations_integrity = { workspace = true }

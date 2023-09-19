@@ -38,10 +38,16 @@ export class ProfileStore extends ComponentStore<ProfileState> {
     return this.select((state) => state.agentProfiles.find(i => i.agentPubKey64 === pubkey)!);
   }
   
-  selectAgentKeyNicksDictionary(pubkey_arr: AgentPubKey[]){
-    const pubkey_arrB64 = pubkey_arr.map(key=>encodeHashToBase64(key))
-    return this.select((state) => state.agentProfiles.filter(ap=>{pubkey_arrB64.includes(ap.agentPubKey64)})
-    .map(ap=>{ return {[ap.agentPubKey64]:ap.keyNick}})) 
+  selectAgentKeyNicksDictionary(){//pubkey_arr: AgentPubKey[]){
+    //this.selectAllAgentProfiles()
+    //.pipe(map(ap => ap.map(p=>p.agentPubKey)))
+    
+    //const pubkey_arrB64 = pubkey_arr.map(key=>encodeHashToBase64(key))
+    //return this.select((state) => state.agentProfiles.filter(ap=>{pubkey_arrB64.includes(ap.agentPubKey64)})
+   // .map(ap=>{ return {[ap.agentPubKey64]:ap.keyNick}})) 
+
+     //const pubkey_arrB64 = pubkey_arr.map(key=>encodeHashToBase64(key))
+    return this.select((state) => state.agentProfiles.map(ap=>{ return {[ap.agentPubKey64]:ap.keyNick}}))
   }
 
 

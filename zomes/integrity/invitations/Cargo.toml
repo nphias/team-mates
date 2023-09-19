@@ -1,0 +1,13 @@
+[package]
+name = "invitations_integrity"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "invitations_integrity"
+
+[dependencies]
+hc_integrity_zome_invitations = {git = "https://github.com/holochain-open-dev/invitations.git", branch = "crates-only"}
+hdi = { workspace = true }
+serde = { workspace = true }

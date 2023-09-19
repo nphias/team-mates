@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { environment } from 'src/environments/environment';
-import { AppSignalCb, AppSignal, AppWebsocket, CellId, InstalledCell, AppInfo, CellInfo, RoleName, CellType, CellProvisioningStrategy, ProvisionedCell, AppAgentWebsocket, ClonedCell, AgentPubKey, AppAgentClient } from '@holochain/client'
+import { AppSignalCb, AppSignal, AppWebsocket, CellId, InstalledCell, AppInfo, CellInfo, RoleName, CellType, CellProvisioningStrategy, ProvisionedCell, AppAgentWebsocket, ClonedCell, AgentPubKey, AppAgentClient, encodeHashToBase64 } from '@holochain/client'
 import { Dictionary, fakeCellId, fakeDNAModifiers, serializeHash } from "../helpers/utils";
 
 
@@ -49,7 +49,7 @@ export class HolochainService implements OnDestroy{
   //here we determine what receptor API's to use 
   get_receptors_for_cell(cell_name:string):string[]{
     switch (cell_name) {
-      case "team": return ['profiles','invitations']
+      case "team-mates": return ['profiles','invitations']
       default: return []
     }
   }
@@ -58,7 +58,7 @@ export class HolochainService implements OnDestroy{
     let res = undefined
     Object.values(this._cellData).forEach((cellDict) => { 
       Object.values(cellDict).forEach((cell) => {
-      if (cell.cell_id[0] == dnahash)
+      if (encodeHashToBase64(cell.cell_id[0]) == encodeHashToBase64(dnahash))
         res = cell.name
       })
     })
@@ -114,7 +114,7 @@ export class HolochainService implements OnDestroy{
         sessionStorage.clear()
           try{
             console.log("Connecting to holochain")
-            this.appWS =  await AppAgentWebsocket.connect(environment.HOST_URL,environment.APP_ID,1500)
+            this.appWS =  await AppAgentWebsocket.connect(new URL(environment.HOST_URL),environment.APP_ID,1500)
             //const appWSp =  await AppWebsocket.connect(environment.HOST_URL,1500)
             this.appWS.on("signal",(s)=>this.signalHandler(s))
             this.appInfo = await this.appWS.appInfo()//{ installed_app_id: environment.APP_ID});

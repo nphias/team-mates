@@ -4,4 +4,4 @@ name: team-mates
 ui:
   bundled: "../ui/ui.zip"
 happ_manifest:
-  bundled: "./team-mates.happ"
+  bundled: "./happ/team-mates.happ"

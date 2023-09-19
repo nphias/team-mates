@@ -7,8 +7,9 @@
   ],
   "scripts": {
     "start": "AGENTS=2 npm run network",
-    "network": "hc s clean && npm run build:happ && UI_PORT=4200 concurrently \"npm start -w ui\" \"npm run launch:happ\" \"holochain-playground\"",
-    "launch:happ": "echo \"pass\" | RUST_LOG=warn hc launch --piped -n $AGENTS workdir/happ/team-mates.happ --ui-port $UI_PORT network mdns",
+    "local-services": "hc run-local-services -b 54000 -s 55000",
+    "network": "npm run build:happ && UI_PORT=4200 concurrently \"npm start -w ui\" \"npm run local-services\" \"npm run launch:happ\" \"holochain-playground\"",
+    "launch:happ": "hc s clean && echo \"pass\" | RUST_LOG=warn hc launch --piped -n $AGENTS workdir/happ/team-mates.happ --ui-port $UI_PORT network -b http://127.0.0.1:54000 webrtc ws://127.0.0.1:55000",
     "package": "npm run build:happ && npm run package -w ui && hc web-app pack workdir/happ --recursive",
     "build:happ": "npm run build:zomes && hc app pack workdir/happ --recursive",
     "build:zomes": "RUSTFLAGS='' CARGO_TARGET_DIR=target cargo build --release --target wasm32-unknown-unknown",

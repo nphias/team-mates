@@ -8,5 +8,5 @@ export const environment = {
   HOST_URL: 'ws://127.0.0.1:8889',
   //HOST_URL:'ws://192.168.1.100:8889',
   APP_ID:'team-mates',
-  cell1:'profile_invitation'
+  cells:['team'] //'profile_invitation'
 };

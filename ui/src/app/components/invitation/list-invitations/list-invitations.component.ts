@@ -17,19 +17,19 @@ import { CommonModule } from '@angular/common';
 })
 export class InvitationListComponent implements OnDestroy{
   public outgoingInvitations$:Observable<InvitationEntryInfo[]>
-  public incommingInvitations$:Observable<InvitationEntryInfo[]>
+  public receivedInvitations$:Observable<InvitationEntryInfo[]>
   private profileDictionarySubscription$!: Subscription
   private profileDictionary:Dictionary<string> = {}
   
   constructor(private readonly _invitationStore: InvitationStore, private readonly _profileStore: ProfileStore) {
     this.outgoingInvitations$  = this._invitationStore.selectUncompletedInvitations().pipe(map(ilist=>ilist.filter(inv=>inv.invitation.inviter.join() === this._profileStore.mypubkey.join())));
-    this.incommingInvitations$  = this._invitationStore.selectUncompletedInvitations().pipe(map(ilist=>ilist.filter(inv=>inv.invitation.inviter.join() !== this._profileStore.mypubkey.join())));
+    this.receivedInvitations$  = this._invitationStore.selectUncompletedInvitations().pipe(map(ilist=>ilist.filter(inv=>inv.invitation.inviter.join() !== this._profileStore.mypubkey.join())));
   }
 
 
   ngOnInit(){
-    let agentList:AgentPubKey[] = []
-    agentList.push(this.outgoingInvitations$.pipe(map(inv=>inv.map(inv=>inv.invitees_who_accepted))))
+    //let agentList:AgentPubKey[] //= []
+   // let agentList = (this.outgoingInvitations$.pipe(map(inv=>inv.map(inv=>inv.invitees_who_accepted))))
     this.profileDictionarySubscription$ = this._profileStore.selectAgentKeyNicksDictionary().subscribe(res=>this.profileDictionary = Object.assign({},...res))
          // .subscribe(res => {this.agentDictionary = Object.assign({}, ...res.map((x) => ({[x.agent_pub_key]: x.nickname})))});
   }
